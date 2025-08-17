@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GAMING | Ultimate Gaming Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        :root {
+            --primary: #0f0c29;
+            --secondary: #302b63;
+            --accent-purple: #9d4edd;
+            --accent-blue: #4361ee;
+            --accent-pink: #f72585;
+            --accent-green: #4cc9f0;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(247, 37, 133, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(67, 97, 238, 0.1) 0%, transparent 30%);
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: transparent;
+            border: 2px solid var(--accent-purple);
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: rgba(157, 78, 221, 0.2);
+            box-shadow: 0 0 15px var(--accent-purple), 0 0 30px rgba(157, 78, 221, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .btn-primary:hover {
+            background: rgba(157, 78, 221, 0.8);
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent-pink), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(15, 12, 41, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent-purple);
+            text-shadow: 0 0 10px var(--accent-purple);
+        }
+
+        .logo i {
+            color: var(--accent-pink);
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.2) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(247, 37, 133, 0.2) 0%, transparent 25%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+        }
+
+        .hero-title span {
+            color: var(--accent-pink);
+            display: block;
+            text-shadow: 0 0 20px rgba(247, 37, 133, 0.7);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .scroll-down::after {
+            content: '';
+            display: block;
+            width: 2px;
+            height: 30px;
+            background: var(--accent-blue);
+            margin-top: 10px;
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Featured Games */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .game-card {
+            background: rgba(25, 22, 53, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(157, 78, 221, 0.2);
+        }
+
+        .game-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .game-content {
+            padding: 20px;
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .game-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .game-rating {
+            color: #ffd700;
+        }
+
+        /* Leaderboard */
+        .leaderboard {
+            background: rgba(15, 12, 41, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .leaderboard-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px;
+            padding: 20px;
+            background: rgba(67, 97, 238, 0.2);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .leaderboard-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .leaderboard-row:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .player-rank {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .player-name {
+            font-weight: 500;
+        }
+
+        .player-score {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--accent-pink);
+        }
+
+        /* Promotions */
+        .promo-slider {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .swiper-slide {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+        }
+
+        .swiper-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(15, 12, 41, 0.8) 0%, rgba(15, 12, 41, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .promo-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .promo-desc {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--accent-purple);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: rgba(157, 78, 221, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: rgba(15, 12, 41, 0.6);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-card {
+            background: rgba(25, 22, 53, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            font-family: serif;
+            color: rgba(157, 78, 221, 0.3);
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            color: #ffd700;
+            margin-left: auto;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: rgba(25, 22, 53, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(67, 97, 238, 0.2);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-date {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.2);
+            color: var(--accent-blue);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .blog-excerpt {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--accent-blue);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(67, 97, 238, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            margin-right: 15px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-pink), var(--accent-blue));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .contact-form {
+            background: rgba(25, 22, 53, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            background: rgba(157, 78, 221, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 8, 30, 0.95);
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-blue);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-pink);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glowing Effects */
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px -5px var(--accent-purple);
+            }
+            to {
+                box-shadow: 0 0 20px 5px var(--accent-purple);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(15, 12, 41, 0.95);
+                backdrop-filter: blur(10px);
+                width: 80%;
+                height: calc(100vh - 80px);
+                transition: 0.5s;
+                padding: 40px 0;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            .hamburger {
+                display: block;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .swiper-slide {
+                padding: 0 30px;
+                height: 350px;
+            }
+            .promo-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            .leaderboard-header, .leaderboard-row {
+                grid-template-columns: 30px 1fr 80px;
+            }
+            .leaderboard-header div:nth-child(4), 
+            .leaderboard-row div:nth-child(4) {
+                display: none;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo"><i class="fas fa-gamepad"></i>NEXUS<span>GAMING</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#leaderboard">Leaderboard</a></li>
+                    <li><a href="#promotions">Promotions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title fade-in">Welcome to the<br><span>Ultimate Gaming Hub</span></h1>
+                <p class="hero-subtitle fade-in">Experience next-level gaming with our cutting-edge platform. Join millions of players worldwide in epic battles and adventures.</p>
+                <a href="#games" class="btn btn-primary fade-in">Play Now</a>
+            </div>
+        </div>
+        <a href="#games" class="scroll-down">Scroll Down</a>
+    </section>
+
+    <!-- Featured Games Section -->
+    <section id="games" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Games</h2>
+                <p class="section-subtitle">Discover our most popular titles and join the action today</p>
+            </div>
+            <div class="games-grid">
+                <!-- Game Card 1 -->
+                <div class="game-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Cyber Strike" class="game-img">
+                    <div class="game-content">
+                        <h3 class="game-title">Cyber Strike</h3>
+                        <p class="game-desc">Futuristic FPS with advanced weaponry and tactical gameplay.</p>
+                        <div class="game-stats">
+                            <span class="game-rating">★★★★★</span>
+                            <span>2.4M Players</span>
+                        </div>
+                        <a href="#" class="btn">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Game Card 2 -->
+                <div class="game-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Dragon's Legacy" class="game-img">
+                    <div class="game-content">
+                        <h3 class="game-title">Dragon's Legacy</h3>
+                        <p class="game-desc">Epic fantasy RPG with deep storytelling and immersive world.</p>
+                        <div class="game-stats">
+                            <span class="game-rating">★★★★☆</span>
+                            <span>1.8M Players</span>
+                        </div>
+                        <a href="#" class="btn">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Game Card 3 -->
+                <div class="game-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Neon Racer" class="game-img">
+                    <div class="game-content">
+                        <h3 class="game-title">Neon Racer</h3>
+                        <p class="game-desc">High-speed racing in futuristic cities with customizable vehicles.</p>
+                        <div class="game-stats">
+                            <span class="game-rating">★★★★★</span>
+                            <span>1.5M Players</span>
+                        </div>
+                        <a href="#" class="btn">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Game Card 4 -->
+                <div class="game-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80" alt="Space Command" class="game-img">
+                    <div class="game-content">
+                        <h3 class="game-title">Space Command</h3>
+                        <p class="game-desc">Strategic space exploration and combat simulation game.</p>
+                        <div class="game-stats">
+                            <span class="game-rating">★★★★☆</span>
+                            <span>1.2M Players</span>
+                        </div>
+                        <a href="#" class="btn">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Top Players</h2>
+                <p class="section-subtitle">Our champions of the month - compete to reach the top!</p>
+            </div>
+            <div class="leaderboard">
+                <div class="leaderboard-header">
+                    <div>Rank</div>
+                    <div>Player</div>
+                    <div>Level</div>
+                    <div>Score</div>
+                </div>
+                
+                <!-- Player 1 -->
+                <div class="leaderboard-row fade-in">
+                    <div class="player-rank">1</div>
+                    <div class="player-info">
+                        <div class="player-avatar">JD</div>
+                        <div class="player-name">John_Doe</div>
+                    </div>
+                    <div>87</div>
+                    <div class="player-score">245,780</div>
+                </div>
+                
+                <!-- Player 2 -->
+                <div class="leaderboard-row fade-in">
+                    <div class="player-rank">2</div>
+                    <div class="player-info">
+                        <div class="player-avatar">SG</div>
+                        <div class="player-name">ShadowGamer</div>
+                    </div>
+                    <div>85</div>
+                    <div class="player-score">238,450</div>
+                </div>
+                
+                <!-- Player 3 -->
+                <div class="leaderboard-row fade-in">
+                    <div class="player-rank">3</div>
+                    <div class="player-info">
+                        <div class="player-avatar">NR</div>
+                        <div class="player-name">NeonRider</div>
+                    </div>
+                    <div>83</div>
+                    <div class="player-score">227,890</div>
+                </div>
+                
+                <!-- Player 4 -->
+                <div class="leaderboard-row fade-in">
+                    <div class="player-rank">4</div>
+                    <div class="player-info">
+                        <div class="player-avatar">CX</div>
+                        <div class="player-name">CyberX</div>
+                    </div>
+                    <div>82</div>
+                    <div class="player-score">221,340</div>
+                </div>
+                
+                <!-- Player 5 -->
+                <div class="leaderboard-row fade-in">
+                    <div class="player-rank">5</div>
+                    <div class="player-info">
+                        <div class="player-avatar">QP</div>
+                        <div class="player-name">QuantumPulse</div>
+                    </div>
+                    <div>81</div>
+                    <div class="player-score">215,670</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section id="promotions" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Special Promotions</h2>
+                <p class="section-subtitle">Limited time offers and exciting events</p>
+            </div>
+            <div class="promo-slider">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                            <div class="promo-content">
+                                <h3 class="promo-title">Season 5: Cyber Invasion</h3>
+                                <p class="promo-desc">New maps, weapons, and exclusive rewards await in the biggest update yet. Join the battle today!</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                            <div class="promo-content">
+                                <h3 class="promo-title">Double XP Weekend</h3>
+                                <p class="promo-desc">Level up twice as fast! All weekend long, get double XP on every match you play.</p>
+                                <a href="#" class="btn btn-primary">Join Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1512790182412-b19e6d62e39d?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                            <div class="promo-content">
+                                <h3 class="promo-title">New Game Launch: Neon Racer</h3>
+                                <p class="promo-desc">Experience high-speed racing in futuristic cities. Pre-order now and get exclusive rewards!</p>
+                                <a href="#" class="btn btn-primary">Pre-order</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Player Testimonials</h2>
+                <p class="section-subtitle">What our gamers say about us</p>
+            </div>
+            <div class="testimonials">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonial 1 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">I've been gaming for over 10 years, and Nexus Gaming is by far the best platform I've used. The community is amazing and the games are top-notch!</p>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">MJ</div>
+                                    <div class="author-info">
+                                        <h4>Mike Johnson</h4>
+                                        <p>Pro Gamer</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">The tournaments and events are incredibly well-organized. I've made friends from all over the world through this platform. Highly recommended!</p>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">SL</div>
+                                    <div class="author-info">
+                                        <h4>Sarah Lee</h4>
+                                        <p>Competitive Player</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-content">As a casual gamer, I appreciate how easy it is to find games I enjoy. The matchmaking system is fantastic and the graphics are mind-blowing!</p>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">DP</div>
+                                    <div class="author-info">
+                                        <h4>David Park</h4>
+                                        <p>Casual Gamer</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog/News Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Gaming News</h2>
+                <p class="section-subtitle">Latest updates, tips, and industry news</p>
+            </div>
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&q=80" alt="Game Development" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">June 12, 2023</span>
+                        <h3 class="blog-title">New Game Engine Update Released</h3>
+                        <p class="blog-excerpt">The latest update to our game engine brings significant performance improvements and new features for developers.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="blog-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Esports" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">June 5, 2023</span>
+                        <h3 class="blog-title">World Championship Finals Announced</h3>
+                        <p class="blog-excerpt">The biggest esports event of the year is coming to Los Angeles with a $5M prize pool up for grabs.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=600&q=80" alt="Gaming Tips" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">May 28, 2023</span>
+                        <h3 class="blog-title">Top 10 Strategies for New Players</h3>
+                        <p class="blog-excerpt">Master these essential strategies to improve your gameplay and climb the leaderboards faster.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have questions or feedback? We'd love to hear from you!</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>123 Gaming Street, Los Angeles, CA 90001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>support@nexusgaming.com</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Nexus Gaming</h4>
+                    <p>Your ultimate destination for premium gaming experiences. Join millions of players worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#promotions">Promotions</a></li>
+                        <li><a href="#blog">News</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Popular Games</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Cyber Strike</a></li>
+                        <li><a href="#">Dragon's Legacy</a></li>
+                        <li><a href="#">Neon Racer</a></li>
+                        <li><a href="#">Space Command</a></li>
+                        <li><a href="#">Shadow Realms</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Nexus Gaming. All rights reserved. Designed with <i class="fas fa-heart" style="color: var(--accent-pink);"></i> for gamers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Swiper sliders
+        const promoSlider = new Swiper('.promo-slider .swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        const testimonialsSlider = new Swiper('#testimonials .swiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 7000,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                }
+            }
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Scroll animation for elements
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -100px 0px"
+        };
+        
+        const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('appear');
+                appearOnScroll.unobserve(entry.target);
+            });
+        }, appearOptions);
+        
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // Form validation
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // In a real application, you would send the form data to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        }
+
+        // Neon glow effect for buttons on hover
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.classList.add('glow');
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('glow');
+            });
+        });
+
+        // GSAP animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate hero content
+            gsap.from('.hero-title', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero-subtitle', {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero .btn', {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                delay: 0.6,
+                ease: "power3.out"
+            });
+            
+            // Animate section titles on scroll
+            gsap.utils.toArray('.section-title').forEach(title => {
+                gsap.from(title, {
+                    scrollTrigger: {
+                        trigger: title,
+                        start: "top 80%"
+                    },
+                    duration: 0.8,
+                    y: 30,
+                    opacity: 0,
+                    ease: "power2.out"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
